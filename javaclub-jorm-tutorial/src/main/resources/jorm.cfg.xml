@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<!DOCTYPE jorm-configuration PUBLIC
+          "-//Javaclub//DTD Jorm Configuration 1.0//EN"
+          "http://javaclub.sourceforge.net/jorm-configuration_1_0.dtd">
+
+<jorm-configuration>
+
+  <constant name="show_sql" value="true" />
+  <constant name="format_sql" value="true"/>
+  <constant name="jdbc.batch_size" value="600" />
+  <constant name="bytecode.provider" value="javassist" />
+  <!-- Jorm.getSession(true)时，下面两个参数才有效 -->
+  <constant name="session.monitor.check_delay" value="10000" />  <!-- 多长时间检测一次session的有效期 -->
+  <constant name="session.lifetime.auto_close" value="60000" /> <!-- 多长时间就自动关闭session -->
+  
+  <connections default="c3p0">
+  
+    <connection name="c3p0">
+      <property name="connection.implementation">com.github.javaclub.jorm.jdbc.connection.impl.PreferedPooledConnection</property>
+      <property name="connection.dialect">MySQLDialect</property>
+      <property name="connection.driver">com.mysql.jdbc.Driver</property>
+      <property name="connection.jdbcurl">jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;characterEncoding=UTF-8</property>
+      <property name="connection.database">test</property>
+      <property name="connection.username">root</property>
+      <property name="connection.password">root</property>
+      <property name="connection.pool.min">1</property>
+      <property name="connection.pool.max">8</property>
+      <property name="connection.test.sql">select 1</property>
+    </connection>
+    
+    <connection name="dbcp">
+      <property name="connection.implementation">com.github.javaclub.jorm.jdbc.connection.impl.DBCPooledConnection</property>
+      <property name="connection.dialect">MySQLDialect</property>
+      <property name="connection.driver">com.mysql.jdbc.Driver</property>
+      <property name="connection.jdbcurl">jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;characterEncoding=UTF-8</property>
+      <property name="connection.database">test</property>
+      <property name="connection.username">root</property>
+      <property name="connection.password">root</property>
+      <property name="connection.pool.min">1</property>
+      <property name="connection.pool.max">8</property>
+      <property name="connection.test.sql">select 1</property>
+    </connection>
+    
+     <connection name="proxool">
+      <property name="connection.implementation">com.github.javaclub.jorm.jdbc.connection.impl.ProxoolPooledConnection</property>
+      <property name="connection.dialect">MySQLDialect</property>
+      <property name="connection.driver">com.mysql.jdbc.Driver</property>
+      <property name="connection.jdbcurl">jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;characterEncoding=UTF-8</property>
+      <property name="connection.database">test</property>
+      <property name="connection.username">root</property>
+      <property name="connection.password">root</property>
+      <property name="connection.pool.min">1</property>
+      <property name="connection.pool.max">8</property>
+      <property name="connection.test.sql">select 1</property>
+    </connection>
+    
+    <connection name="proxool_original_used">
+      <property name="connection.implementation">com.github.javaclub.jorm.jdbc.connection.impl.ProxoolPooledConnection</property>
+      <property name="connection.dialect">MySQLDialect</property>
+      <property name="connection.driver">com.mysql.jdbc.Driver</property>
+      <property name="connection.jdbcurl">jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;characterEncoding=UTF-8</property>
+      <property name="connection.database">test</property>
+      <property name="connection.username">root</property>
+      <property name="connection.password">root</property>
+      <property name="connection.pool.proxool">classpath:conf/proxool.xml</property>
+    </connection>
+    
+    <connection name="bonecp">
+      <property name="connection.implementation">com.github.javaclub.jorm.jdbc.connection.impl.BoneCPooledConnection</property>
+      <property name="connection.dialect">MySQLDialect</property>
+      <property name="connection.driver">com.mysql.jdbc.Driver</property>
+      <property name="connection.jdbcurl">jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;characterEncoding=UTF-8</property>
+      <property name="connection.database">test</property>
+      <property name="connection.username">root</property>
+      <property name="connection.password">root</property>
+      <property name="connection.pool.min">1</property>
+      <property name="connection.pool.max">8</property>
+      <property name="connection.test.sql">select 1</property>
+    </connection>
+    
+    <connection name="bonecp_original_used">
+      <property name="connection.implementation">com.github.javaclub.jorm.jdbc.connection.impl.BoneCPooledConnection</property>
+      <property name="connection.dialect">MySQLDialect</property>
+      <property name="connection.driver">com.mysql.jdbc.Driver</property>
+      <property name="connection.jdbcurl">jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;characterEncoding=UTF-8</property>
+      <property name="connection.database">test</property>
+      <property name="connection.username">root</property>
+      <property name="connection.password">root</property>
+      <property name="connection.pool.bonecp">classpath:conf/bonecp-config.xml</property>
+    </connection>
+    
+    <connection name="datasource">
+      <property name="connection.implementation">com.github.javaclub.jorm.jdbc.connection.impl.DataSourceConnection</property>
+      <property name="connection.dialect">MySQLDialect</property>
+      <property name="jndi.url">java:comp/env/jdbc/mysqlds</property>
+    </connection>
+    
+    <connection name="simple">
+      <property name="connection.implementation">com.github.javaclub.jorm.jdbc.connection.impl.SimpleConnection</property>
+      <property name="connection.dialect">MySQLDialect</property>
+      <property name="connection.driver">com.mysql.jdbc.Driver</property>
+      <property name="connection.jdbcurl">jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;characterEncoding=UTF-8</property>
+      <property name="connection.database">test</property>
+      <property name="connection.username">root</property>
+      <property name="connection.password">root</property>
+    </connection>
+    
+    <connection name="h2">
+      <property name="connection.implementation">com.github.javaclub.jorm.jdbc.connection.impl.PreferedPooledConnection</property>
+      <property name="connection.dialect">H2Dialect</property>
+      <property name="connection.driver">org.h2.Driver</property>
+      <property name="connection.jdbcurl">jdbc:h2:tcp://127.0.0.1/~/test</property>
+      <property name="connection.database">test</property>
+      <property name="connection.username">sa</property>
+      <property name="connection.password"></property>
+      <property name="connection.pool.min">1</property>
+      <property name="connection.pool.max">8</property>
+      <property name="connection.test.sql">select 1</property>
+    </connection>
+    
+    <connection name="Oracle">
+      <property name="connection.implementation">com.github.javaclub.jorm.jdbc.connection.impl.C3P0PooledConnection</property>
+      <property name="connection.dialect">OracleDialect</property>
+      <property name="connection.driver">oracle.jdbc.driver.OracleDriver</property>
+      <property name="connection.jdbcurl">jdbc:oracle:thin:@127.0.0.1:1521:test</property>
+      <property name="connection.database">test</property>
+      <property name="connection.username">root</property>
+      <property name="connection.password">root</property>
+      <property name="connection.pool.min">1</property>
+      <property name="connection.pool.max">8</property>
+    </connection>
+    
+    <connection name="MSSQL2000">
+      <property name="connection.implementation">com.github.javaclub.jorm.jdbc.connection.impl.PreferedPooledConnection</property>
+      <property name="connection.dialect">SQLServerDialect</property>
+      <property name="connection.driver">net.sourceforge.jtds.jdbc.Driver</property>
+      <property name="connection.jdbcurl">jdbc:jtds:sqlserver://localhost:1433/test;tds=8.0;lastupdatecount=true</property>
+      <property name="connection.database">test</property>
+      <property name="connection.username">sa</property>
+      <property name="connection.password">root</property>
+      <property name="connection.pool.min">1</property>
+      <property name="connection.pool.max">8</property>
+    </connection>
+    
+    <connection name="MSSQL2005">
+      <property name="connection.implementation">com.github.javaclub.jorm.jdbc.connection.impl.PreferedPooledConnection</property>
+      <property name="connection.dialect">SQLServerDialect</property>
+      <property name="connection.driver">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+      <property name="connection.jdbcurl">jdbc:sqlserver://localhost:1433;DatabaseName=test</property>
+      <property name="connection.database">test</property>
+      <property name="connection.username">sa</property>
+      <property name="connection.password">root</property>
+      <property name="connection.pool.min">1</property>
+      <property name="connection.pool.max">8</property>
+    </connection>
+    
+    <connection name="MSSQL2005_jtds">
+      <property name="connection.implementation">com.github.javaclub.jorm.jdbc.connection.impl.PreferedPooledConnection</property>
+      <property name="connection.dialect">SQLServerDialect</property>
+      <property name="connection.driver">net.sourceforge.jtds.jdbc.Driver</property>
+      <property name="connection.jdbcurl">jdbc:jtds:sqlserver://localhost:1433/test;tds=8.0;lastupdatecount=true</property>
+      <property name="connection.database">test</property>
+      <property name="connection.username">sa</property>
+      <property name="connection.password">root</property>
+      <property name="connection.pool.min">1</property>
+      <property name="connection.pool.max">8</property>
+    </connection>
+    
+    <connection name="PostgreSQL">
+      <property name="connection.implementation">com.github.javaclub.jorm.jdbc.connection.impl.PreferedPooledConnection</property>
+      <property name="connection.dialect">PostgreSQLDialect</property>
+      <property name="connection.driver">org.postgresql.Driver</property>
+      <property name="connection.jdbcurl">jdbc:postgresql://localhost:5432/test</property>
+      <property name="connection.database">test</property>
+      <property name="connection.username">postgres</property>
+      <property name="connection.password">123456</property>
+      <property name="connection.pool.min">1</property>
+      <property name="connection.pool.max">8</property>
+    </connection>
+    
+
+  </connections>
+</jorm-configuration>
