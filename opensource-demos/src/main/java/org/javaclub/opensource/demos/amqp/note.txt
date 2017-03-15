@@ -1,0 +1,5 @@
+
+2011年08月26日Spring AMQP 1.0 GA 版本发布
+
+Spring AMQP 是基于 Spring 框架的 AMQP 消息解决方案，提供模板化的发送和接收消息的抽象层，
+提供基于消息驱动的 POJO。同时有 Java 和 .NET 的版本。

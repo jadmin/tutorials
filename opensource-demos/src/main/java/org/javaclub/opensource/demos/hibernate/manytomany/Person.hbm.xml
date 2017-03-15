@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="org.javaclub.opensource.demos.hibernate.manytomany.Person" table="t_person">
+        <id name="personid">
+            <generator class="identity"/>
+        </id>
+        <property name="name"/>
+        <property name="age"/>
+        <!--映射集合属性，关联到持久化类-->
+        <!--table="join_1ntab_sx"指定了连接表的名字-->
+        <set name="addresses"
+             table="realation_join"
+             cascade="all">
+            <!--column="personid"指定连接表中关联当前实体类的列名-->
+            <key column="personid" not-null="true"/>
+            <!--column="addressid"是连接表中关联本实体的外键-->
+            <many-to-many column="addressid" class="org.javaclub.opensource.demos.hibernate.manytomany.Address"/>
+        </set>
+    </class>
+</hibernate-mapping>

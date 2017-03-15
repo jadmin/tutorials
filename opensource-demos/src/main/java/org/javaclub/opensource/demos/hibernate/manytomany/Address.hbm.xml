@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="org.javaclub.opensource.demos.hibernate.manytomany.Address"
+           table="t_address">
+        <id name="addressid">
+            <generator class="identity"/>
+        </id>
+        <property name="addressdetail"/>
+        <!--table="join_nn_sx"是双向多对多的连接表-->
+        <set name="persons"
+             cascade="all"
+             table="realation_join">
+            <!--column="addressid"是连接表中关联本实体的外键-->
+            <key column="addressid"/>
+            <many-to-many column="personid" class="org.javaclub.opensource.demos.hibernate.manytomany.Person"/>
+        </set>
+    </class>
+</hibernate-mapping>

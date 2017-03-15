@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping >
+	<class name="org.javaclub.opensource.demos.hibernate.onetoone.Person" table="t_person">
+		<id name="id">
+			<generator class="foreign">
+				<!-- person中的id来源于idCard，即共享idCard主键 -->
+				<param name="property">idCard</param>
+			</generator>
+		</id>
+		<property name="name"/>
+		<!-- constrained="true",当前主键上存在一个约束，表明person中的主键作为外键参照了idCard -->
+		<one-to-one name="idCard" constrained="true"/>
+	</class>
+</hibernate-mapping>
