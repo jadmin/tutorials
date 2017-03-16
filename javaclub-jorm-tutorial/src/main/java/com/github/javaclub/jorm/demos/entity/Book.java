@@ -28,7 +28,7 @@ import com.github.javaclub.jorm.annotation.constant.GenerationType;
 @PK("id")
 public class Book {
 
-	@Id(GenerationType.IDENTITY)
+	@Id(GenerationType.UUID)
 	@Column("book_id")
 	private String id;
 
