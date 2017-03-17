@@ -40,7 +40,7 @@ public class Category {
 	@Column("create_time")
 	private Date createTime;
 	
-	@OneToMany(type = Book.class, selField="categoryId", ownerField="id")
+	@OneToMany(type = Book.class, selField="categoryId", ownerField="id", cascade=false)
 	private List<Book> books = new ArrayList<Book>();
 	
 	public Category() {

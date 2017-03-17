@@ -38,14 +38,7 @@ public class ManyToOneTest {
 	
 	@Test
 	public void testGetOne() {
-		session.clean(Category.class);
-		Category category = null;
-		for(int i = 0; i < 28; i++) {
-			category = new Category(Strings.fixed(8));
-			category.setOrder(i);
-			category.setCreateTime(DateUtil.randomDate("1999-01-01", "2011-01-01"));
-			session.save(category);
-		}
+		createCategory();
 		
 		session.clean(Book.class);
 		Book book = null;
@@ -60,12 +53,22 @@ public class ManyToOneTest {
 			System.out.println(book.getCategory());
 		}
 	}
-	
+
 	@Test
 	public void testGetBook() throws Exception {
-//		Book book = Book.class.newInstance();
-		Book book = session.read(Book.class, "1e31f573d1aa48109a9b53c22e3acd1e");
-		System.out.println(book);
+		this.createCategory();
+		
+		Book book = new Book(Strings.fixed(10));
+		book.setCategoryId(Numbers.random(28));
+		book.setAuthor(Strings.fixed(3));
+		book.setIsbn(Strings.fixed(3) + "-" + Strings.fixed(2) + "-" + Strings.fixed(6));
+		book.setPubTime(DateUtil.randomDate("1999-01-01", "2008-01-01"));
+		book.setCreateTime(DateUtil.randomDate("1999-01-01", "2008-01-01"));
+		String id = (String) session.save(book);
+		
+		Book loadbook = session.read(Book.class, id);
+		System.out.println(loadbook);
+		System.out.println("category => " + loadbook.getCategory());
 	}
 	
 	@Test
@@ -74,9 +77,11 @@ public class ManyToOneTest {
 		category = session.read(Category.class, 1);;
 		List<Book> list = category.getBooks();
 		PersistentCollection pc = (PersistentCollection) list;
-		if(pc.hasNext()) {
+		System.out.println("totalBooks=" + pc.count());
+		while(pc.hasNext()) {
 			Book bk = (Book) pc.next();
 			System.out.println(bk);
+			System.out.println("cate => " + bk.getCategory());
 		}
 	}
 	
@@ -90,5 +95,16 @@ public class ManyToOneTest {
 				System.out.println((j + 1) + " -> " + (Book) list.get(j));
 			}
 		}*/
+	}
+	
+	protected void createCategory() {
+		session.clean(Category.class);
+		Category category = null;
+		for(int i = 0; i < 28; i++) {
+			category = new Category(Strings.fixed(8));
+			category.setOrder(i);
+			category.setCreateTime(DateUtil.randomDate("1999-01-01", "2011-01-01"));
+			session.save(category);
+		}
 	}
 }
