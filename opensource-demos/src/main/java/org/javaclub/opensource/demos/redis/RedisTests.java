@@ -44,6 +44,7 @@ public class RedisTests {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+		jedis.disconnect(); 
 	}
 
 	/**

@@ -83,7 +83,7 @@ public final class RedisUtil {
      * 释放jedis资源
      * @param jedis
      */
-    public static void close(final Jedis jedis) {
+    public static void returnResource(final Jedis jedis) {
         if (jedis != null) {
             jedisPool.close();
         }
