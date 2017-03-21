@@ -30,7 +30,7 @@ public class RedisTests {
 
 	private static Jedis jedis;
 
-	static final String REDIS_IP = "127.0.0.1";
+	static final String REDIS_IP = "192.168.200.199";
 	static final int REDIS_PORT = 6379;
 	static final String REDIS_AUTH = "admin";
 
@@ -39,7 +39,7 @@ public class RedisTests {
 		// 连接redis服务器，192.168.0.100:6379
 		jedis = new Jedis(REDIS_IP, REDIS_PORT);
 		// 权限认证
-		// jedis.auth(REDIS_AUTH);
+		jedis.auth(REDIS_AUTH);
 	}
 
 	@AfterClass
