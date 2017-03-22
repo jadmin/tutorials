@@ -7,5 +7,6 @@
   <packaging>pom</packaging>
   <modules>
     <module>hadoop-tutorial</module>
+    <module>redis-tutorial</module>
   </modules>
 </project>
