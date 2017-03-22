@@ -29,12 +29,9 @@ public class StringsPlay {
 	public static void setUpBeforeClass() throws Exception {
 	}
 
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
 	@Test
 	public void testPadding() {
+		
 		assertEquals("test", Strings.emptyToNull("test"));  
 		assertEquals(" ", Strings.emptyToNull(" "));  
 		assertNull(Strings.emptyToNull(""));  
