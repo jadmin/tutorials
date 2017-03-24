@@ -1,84 +1,71 @@
 package org.javaclub.opensource.demos.thread;
 
-class QueueTest
-{
-	public static void main(String[] args)
-	{
-		Queue q=new Queue();
-		Producer p=new Producer(q);
-		Consumer c=new Consumer(q);
+public class QueueTest {
+	public static void main(String[] args) {
+		Queue q = new Queue();
+		Producer p = new Producer(q);
+		Consumer c = new Consumer(q);
 		p.start();
 		c.start();
 	}
 }
 
-class Producer extends Thread
-{
+class Producer extends Thread {
 	Queue q;
-	Producer(Queue q)
-	{
-		this.q=q;
+
+	Producer(Queue q) {
+		this.q = q;
 	}
-	public void run()
-	{
-		for(int i=0;i<10;i++)
-		{
+
+	public void run() {
+		for (int i = 0; i < 10; i++) {
 			q.put(i);
-			System.out.println("Producer put "+i);
+			System.out.println("Producer put " + i);
 		}
 	}
 }
-class Consumer extends Thread
-{
+
+class Consumer extends Thread {
 	Queue q;
-	Consumer(Queue q)
-	{
-		this.q=q;
+
+	Consumer(Queue q) {
+		this.q = q;
 	}
-	public void run()
-	{
-		while(true)
-		{
-			System.out.println("Consumer get "+q.get());
+
+	public void run() {
+		while (true) {
+			System.out.println("Consumer get " + q.get());
 		}
 	}
 }
-class Queue
-{
+
+class Queue {
 	int value;
-	boolean bFull=false;
-	public synchronized void put(int i)
-	{
-		if(!bFull)
-		{
-			value=i;
-			bFull=true;
+	boolean bFull = false;
+
+	public synchronized void put(int i) {
+		if (!bFull) {
+			value = i;
+			bFull = true;
 			notify();
 		}
-		try
-		{
+		try {
 			wait();
-		}
-		catch(Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-			
+
 	}
-	public synchronized int get()
-	{
-		if(!bFull)
-		{
-			try
-			{
+
+	public synchronized int get() {
+		if (!bFull) {
+			try {
 				wait();
-			}
-			catch(Exception e)
-			{
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		bFull=false;
+		bFull = false;
 		notify();
 		return value;
 	}
