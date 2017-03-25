@@ -9,6 +9,8 @@ package org.javaclub.opensource.demos.thread.deadlock;
 
 /**
  * 用两个线程请求被对方占用的资源，实现线程死锁
+ * 
+ * 简单来说：死锁就是当一个或多个进程都在等待系统资源，而资源本身又被占用时，所产生的一种状态。
  *
  * @author <a href="mailto:gerald.chen.hz@gmail.com">Gerald Chen</a>
  * @version $Id: DeadLockThread.java 2017-03-24 2017-03-24 11:24:53 Exp $
