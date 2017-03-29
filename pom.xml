@@ -8,5 +8,7 @@
   <modules>
     <module>hadoop-tutorial</module>
     <module>redis-tutorial</module>
+    <module>java-8-lambdas</module>
+    <module>rabbitmq</module>
   </modules>
 </project>
