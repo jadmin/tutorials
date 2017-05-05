@@ -8,6 +8,7 @@
 package org.javaclub.opensource.demos.abc;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import org.javaclub.opensource.demos.exception.BizException;
 
@@ -138,6 +139,20 @@ public final class BizObjects {
 			return value;
 		}
 		
+		public RefNode ifTrue(boolean flag, MessageCode mc) {
+			if(flag) {
+				throw new BizException(mc);
+			}
+			return this;
+		}
+		
+		public RefNode ifFalse(boolean flag, MessageCode mc) {
+			if(!flag) {
+				throw new BizException(mc);
+			}
+			return this;
+		}
+		
 		public RefNode ifTrue(boolean flag, RuntimeException e) {
 			if(flag) {
 				throw e;
@@ -157,6 +172,8 @@ public final class BizObjects {
 		int val = 188;
 		int count = BizObjects.create()
 							.ifFalse(val > 100, new BizException("异常错误信息"))
+							.ifTrue(new Date().getTime() < 10000, new BizException("时间信息错误"))
+							.ifFalse(-2 > 0, MessageCode.PARAMS_NUMBER_SHOULD_POSITIVE)
 							.present(100);
 		System.out.println(count);
 	}
