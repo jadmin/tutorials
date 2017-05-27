@@ -13,7 +13,7 @@ import java.util.zip.CRC32;
 import org.javaclub.opensource.demos.etc.ByteUtil;
 
 /**
- * desc
+ * HashAlgorithm
  *
  * @author <a href="mailto:gerald.chen@qq.com">Gerald Chen</a>
  * @version $Id: HashAlgorithm.java 2012-3-20 21:46:34$
