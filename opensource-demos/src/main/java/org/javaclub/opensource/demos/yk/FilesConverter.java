@@ -17,6 +17,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
+/**
+ * FilesConverter 文件编码格式批量转换
+ *
+ * @author <a href="mailto:gerald.chen.hz@gmail.com">Gerald Chen</a>
+ * @version $Id: FilesConverter.java 2011-09-28 8:38:37 Exp $
+ */
 public class FilesConverter {
 	
 	public static void main(String[] args) throws IOException {
