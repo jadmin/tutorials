@@ -190,8 +190,8 @@ public class AtlassianLicenseGenerator {
 	static {
 		try {
 			KeyFactory keyFactory = KeyFactory.getInstance("DSA");
-			// 公钥(暂时不要修改)
-			// 5.8.10破解时需要把 com.atlassian.extras.decoder.v2.Version2LicenseDecoder中的encode公钥用下面的字符串参数替换
+			// 公钥 (暂时不要修改)
+			// confluence 5.8.10破解时需要把 com.atlassian.extras.decoder.v2.Version2LicenseDecoder中的encode公钥用下面的字符串参数替换
 			/**
 			 * 1. 反编译atlassian-extras-decoder-v2-3.2.jar
 			 * 2. 用encodePublic替换掉com.atlassian.extras.decoder.v2.Version2LicenseDecoder里的公钥
