@@ -188,6 +188,7 @@ public class AtlassianLicenseGenerator {
 	static byte[] licenseTextPrefix = { 13, 14, 12, 10, 15 };
 
 	static {
+		
 		try {
 			KeyFactory keyFactory = KeyFactory.getInstance("DSA");
 			// 公钥 (暂时不要修改)
