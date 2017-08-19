@@ -112,6 +112,9 @@ public class MapsPlay {
 		Assert.assertTrue("jack".equals(map.get(80)));
 		Assert.assertTrue(21 == map.inverse().get("tom"));
 		
+		BiMap<String,Integer> inverseMap = map.inverse();
+		System.out.println(inverseMap);
+		
 		System.out.println(map);
 	}
 
