@@ -23,7 +23,6 @@ public class ExampleDriver {
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
-
 		System.exit(exitCode);
 	}
 }
