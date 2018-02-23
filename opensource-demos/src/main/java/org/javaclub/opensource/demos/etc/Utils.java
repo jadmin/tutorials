@@ -13,6 +13,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.StringReader;
 import java.net.URL;
@@ -21,9 +22,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import org.springframework.util.Assert;
+
 
 /**
- * Utils 通用工具类
+ * Utils 通用工具类(Strings/IO等)
  *
  * @author <a href="mailto:gerald.chen.hz@gmail.com">Gerald Chen</a>
  * @version $Id: Utils.java 2018年2月23日 22:01:51 Exp $
@@ -33,6 +36,7 @@ public class Utils {
 	public static final int BUFFER_SIZE = 4096;
 	
 	public static final String EMPTY_STRING = "";
+	public static final String DEFAULT_CHARSET = "UTF-8";
 
 	private Utils() {
 		// forbidden build
@@ -388,6 +392,32 @@ public class Utils {
 	@SuppressWarnings("static-access")
 	public static InputStream getClasspathStream(String resource) {
 		return getDefaultClassLoader().getSystemResourceAsStream(resource);
+	}
+	
+	/**
+	 * Returns the contents of this InputStream as a String, using the specified charset.
+	 *
+	 * @param input The InputStream
+	 * @param charset charset encoding
+	 * @return the contents of this InputStream, string format
+	 * @throws IOException
+	 */
+	public static String readAsString(InputStream input, String charset) throws IOException {
+		Assert.notNull(input);
+		String encoding = DEFAULT_CHARSET;
+		if (null != charset && charset.length() != 0) {
+			encoding = charset;
+		}
+		BufferedReader r = new BufferedReader(new InputStreamReader(input, encoding));
+		StringBuffer b = new StringBuffer();
+		while (true) {
+			int ch = r.read();
+			if (ch == -1)
+				break;
+			b.append((char) ch);
+		}
+		r.close();
+		return b.toString();
 	}
 	
 	public static File toFile(URL url) {
