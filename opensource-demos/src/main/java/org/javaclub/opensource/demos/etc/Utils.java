@@ -39,6 +39,9 @@ public class Utils {
 	
 	public static final String EMPTY_STRING = "";
 	public static final String DEFAULT_CHARSET = "UTF-8";
+	
+	private static final char[] HEX = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+    
 
 	private Utils() {
 		// forbidden build
@@ -384,8 +387,6 @@ public class Utils {
         return sb.toString();
     }
 
-    private static final char[] HEX = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
-    
 	
 	// ===== Strings end =======
 	
