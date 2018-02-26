@@ -14,7 +14,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.io.StringReader;
 import java.net.URL;
 import java.security.MessageDigest;
@@ -28,6 +31,7 @@ import java.util.List;
 import java.util.Properties;
 
 import org.springframework.util.Assert;
+
 
 /**
  * Utils 通用工具类(Strings/IO等)
@@ -562,6 +566,69 @@ public class Utils {
 			closeQuietly(out);
 		}
 	}
+	
+	public static byte[] serialize(final Serializable obj) {
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream(512);
+        serialize(obj, baos);
+        return baos.toByteArray();
+    }
+	
+	public static <T> T deserialize(final byte[] objectData) {
+        if (objectData == null) {
+            throw new IllegalArgumentException("The byte[] must not be null");
+        }
+        return deserialize(new ByteArrayInputStream(objectData));
+    }
+	
+	public static void serialize(final Serializable obj, final OutputStream outputStream) {
+        if (outputStream == null) {
+            throw new IllegalArgumentException("The OutputStream must not be null");
+        }
+        ObjectOutputStream out = null;
+        try {
+            // stream closed in the finally
+            out = new ObjectOutputStream(outputStream);
+            out.writeObject(obj);
+
+        } catch (final IOException ex) {
+        	throw new RuntimeException("Java serialize IOException : ", ex);
+        } finally {
+            try {
+                if (out != null) {
+                    out.close();
+                }
+            } catch (final IOException ex) { // NOPMD
+                // ignore close exception
+            }
+        }
+    }
+	
+	public static <T> T deserialize(final InputStream inputStream) {
+        if (inputStream == null) {
+            throw new IllegalArgumentException("The InputStream must not be null");
+        }
+        ObjectInputStream in = null;
+        try {
+            // stream closed in the finally
+            in = new ObjectInputStream(inputStream);
+            @SuppressWarnings("unchecked")
+            final T obj = (T) in.readObject();
+            return obj;
+
+        } catch (final ClassNotFoundException ex) {
+            throw new RuntimeException("Java deserialize ClassNotFoundException : ", ex);
+        } catch (final IOException ex) {
+            throw new RuntimeException("Java deserialize IOException : ", ex);
+        } finally {
+            try {
+                if (in != null) {
+                    in.close();
+                }
+            } catch (final IOException ex) { // NOPMD
+                // ignore close exception
+            }
+        }
+    }
 
 	public static void closeQuietly(InputStream in) {
 		try {
