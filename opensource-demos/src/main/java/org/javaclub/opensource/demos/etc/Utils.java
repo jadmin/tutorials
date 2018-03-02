@@ -19,6 +19,9 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.io.StringReader;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -27,6 +30,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
 
@@ -45,9 +49,13 @@ public class Utils {
 
 	public static final String EMPTY_STRING = "";
 	public static final String DEFAULT_CHARSET = "UTF-8";
+	
+	/**
+	 * 取的本机IP(内网)
+	 */
+	public static String localIp = null;
 
-	private static final char[] HEX = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e',
-			'f' };
+	private static final char[] HEX = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
 
 	private Utils() {
 		// forbidden build
@@ -685,6 +693,32 @@ public class Utils {
 	}
 
 	// ======== IO end ===========
+	
+	/**
+	 * 取当前本机内网ID
+	 */
+	public static String getLocalIp() throws SocketException {
+		if (localIp != null) {
+			return localIp;
+		}
+		Enumeration<NetworkInterface> netInterfaces = NetworkInterface.getNetworkInterfaces();
+		InetAddress ip = null;
+		while (netInterfaces.hasMoreElements()) {
+			NetworkInterface ni = netInterfaces.nextElement();
+			Enumeration<InetAddress> address = ni.getInetAddresses();
+			while (address.hasMoreElements()) {
+				ip = address.nextElement();
+				if (!ip.isSiteLocalAddress() && !ip.isLoopbackAddress() && ip.getHostAddress().indexOf(":") == -1) { // 外网IP
+					// netip = ip.getHostAddress();
+					break;
+				} else if (ip.isSiteLocalAddress() && !ip.isLoopbackAddress() && ip.getHostAddress().indexOf(":") == -1) { // 内网IP
+					localIp = ip.getHostAddress();
+					return localIp;
+				}
+			}
+		}
+		return null;
+	}
 
 	public static void main(String[] args) {
 		String mavenPomFile = String.format("META-INF/maven/%s/%s/pom.properties", "groupId", "artifactId");
