@@ -25,10 +25,10 @@ import java.util.zip.DeflaterOutputStream;
  * AtlassianLicenseGenerator
  *
  * @author <a href="mailto:gerald.chen.hz@gmail.com">Gerald Chen</a>
- * @version $Id: AtlassianLicenseGenerator.java 2017-08-19 2017-08-19 20:35:35
- *          Exp $
+ * @version $Id: AtlassianLicenseGenerator.java 2017-08-19 2017-08-19 20:35:35 Exp $
  */
 public class AtlassianLicenseGenerator {
+	
 	public static final String CONFLUENCE_SERVER_LICENSE_DESC = "Confluence (Server)";
 	public static final String CONFLUENCE_DATA_CENTER_LICENSE_DESC = "Confluence (Data Center)";
 	public static final String JIRA_SOFTWARE_SERVER_LICENSE_DESC = "Jira Software (Server)";
