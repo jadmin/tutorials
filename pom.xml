@@ -10,5 +10,6 @@
     <module>redis-tutorial</module>
     <module>java-8-lambdas</module>
     <module>rabbitmq</module>
+    <module>at-license</module>
   </modules>
 </project>
