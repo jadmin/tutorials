@@ -30,7 +30,7 @@ public class SimpleTests {
 
 	private static Jedis jedis;
 
-	static final String REDIS_IP = "192.168.200.199";
+	static final String REDIS_IP = "192.168.56.111";
 	static final int REDIS_PORT = 6379;
 	static final String REDIS_AUTH = "admin";
 
