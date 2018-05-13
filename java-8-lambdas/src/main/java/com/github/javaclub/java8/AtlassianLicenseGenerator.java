@@ -38,6 +38,8 @@ public class AtlassianLicenseGenerator {
 	public static final String BAMBOO_SERVER_LICENSE_DESC = "Bamboo (Server) Unlimited Remote Agents";
 	public static final String CRUCIBLE_SERVER_LICENSE_DESC = "Crucible (Server)";
 	public static final String FISH_EYE_SERVER_LICENSE_DESC = "FishEye (Server)";
+	public static final String CROWD_SERVER_LICENSE_DESC = "Crowd(Server)";
+	
 	static String COMMON_LICENSE_CONTENT = "Description=$$licenseDesc$$\n" + "ServerID=$$serverid$$\n"
 			+ "Organisation=$$org$$\n" + "ContactEMail=$$email$$\n" + "LicenseTypeName=COMMERCIAL\n"
 			+ "NumberOfUsers=-1\n" + "Subscription=true\n" + "Evaluation=false\n" + "PurchaseDate=2017-03-14\n"
@@ -64,6 +66,10 @@ public class AtlassianLicenseGenerator {
 			+ "crucible.Starter=false\n" + "crucible.NumberOfUsers=-1\n" + "crucible.active=true";
 	static String FISH_SPECIAL_LICENSE_CONTENT = "fisheye.active=true\n" + "fisheye.Starter=false\n"
 			+ "fisheye.LicenseTypeName=COMMERCIAL\n" + "fisheye.NumberOfUsers=-1";
+	static String CROWD_SPECIAL_LICENSE_CONTENT = "crowd.active=true\n" +
+            "crowd.Starter=false\n" +
+            "crowd.LicenseTypeName=COMMERCIAL\n" +
+            "crowd.NumberOfUsers=-1";
 
 	static String LINE_SEPARATOR = System.getProperty("line.separator");
 	static Scanner scanner = new Scanner(System.in);
@@ -80,68 +86,74 @@ public class AtlassianLicenseGenerator {
 		prompt.append("\t4: ").append(BAMBOO_SERVER_LICENSE_DESC).append(LINE_SEPARATOR);
 		prompt.append("\t5: ").append(CRUCIBLE_SERVER_LICENSE_DESC).append(LINE_SEPARATOR);
 		prompt.append("\t6: ").append(FISH_EYE_SERVER_LICENSE_DESC).append(LINE_SEPARATOR);
+		prompt.append("\t7: ").append(CROWD_SERVER_LICENSE_DESC).append(LINE_SEPARATOR);
 		System.out.print(prompt);
 		System.out.print(">> Input selected license type code: ");
 		int licenseTypeCode = scanner.nextInt();
 		switch (licenseTypeCode) {
-		case 11:
-			COMMON_LICENSE_CONTENT = COMMON_LICENSE_CONTENT.replace("$$licenseDesc$$", CONFLUENCE_SERVER_LICENSE_DESC)
-					.replace("$$license_expiry_date$$", "unlimited")
-					.replace("$$maintenance_expiry_date$$", "253402257599855");
-			CONFLUENCE_SPECIAL_LICENSE_CONTENT = CONFLUENCE_SPECIAL_LICENSE_CONTENT.replace("$$data_center$$", "false");
-			break;
-		case 12:
-			COMMON_LICENSE_CONTENT = COMMON_LICENSE_CONTENT
-					.replace("$$licenseDesc$$", CONFLUENCE_DATA_CENTER_LICENSE_DESC)
-					.replace("$$license_expiry_date$$", "253402257599855")
-					.replace("$$maintenance_expiry_date$$", "253402257599855");
-			CONFLUENCE_SPECIAL_LICENSE_CONTENT = CONFLUENCE_SPECIAL_LICENSE_CONTENT.replace("$$data_center$$", "true");
-			break;
-		case 21:
-			COMMON_LICENSE_CONTENT = COMMON_LICENSE_CONTENT
-					.replace("$$licenseDesc$$", JIRA_SOFTWARE_SERVER_LICENSE_DESC)
-					.replace("$$license_expiry_date$$", "unlimited")
-					.replace("$$maintenance_expiry_date$$", "253402257599855");
-			JIRA_SPECIAL_LICENSE_CONTENT = JIRA_SPECIAL_LICENSE_CONTENT.replace("$$data_center$$", "false");
-			break;
-		case 22:
-			COMMON_LICENSE_CONTENT = COMMON_LICENSE_CONTENT
-					.replace("$$licenseDesc$$", JIRA_SOFTWARE_DATA_CENTER_LICENSE_DESC)
-					.replace("$$license_expiry_date$$", "253402257599855")
-					.replace("$$maintenance_expiry_date$$", "253402257599855");
-			JIRA_SPECIAL_LICENSE_CONTENT = JIRA_SPECIAL_LICENSE_CONTENT.replace("$$data_center$$", "true");
-			break;
-		case 31:
-			COMMON_LICENSE_CONTENT = COMMON_LICENSE_CONTENT.replace("$$licenseDesc$$", BITBUCKET_SERVER_LICENSE_DESC)
-					.replace("$$license_expiry_date$$", "unlimited")
-					.replace("$$maintenance_expiry_date$$", "253402257599855");
-			BITBUCKET_SPECIAL_LICENSE_CONTENT = BITBUCKET_SPECIAL_LICENSE_CONTENT.replace("$$data_center$$", "false");
-			break;
-		case 32:
-			COMMON_LICENSE_CONTENT = COMMON_LICENSE_CONTENT
-					.replace("$$licenseDesc$$", BITBUCKET_DATA_CENTER_LICENSE_DESC)
-					.replace("$$license_expiry_date$$", "253402257599855")
-					.replace("$$maintenance_expiry_date$$", "253402257599855");
-			BITBUCKET_SPECIAL_LICENSE_CONTENT = BITBUCKET_SPECIAL_LICENSE_CONTENT.replace("$$data_center$$", "true");
-			break;
-		case 4:
-			COMMON_LICENSE_CONTENT = COMMON_LICENSE_CONTENT.replace("$$licenseDesc$$", BAMBOO_SERVER_LICENSE_DESC)
-					.replace("$$license_expiry_date$$", "unlimited")
-					.replace("$$maintenance_expiry_date$$", "4102401599852");
-			break;
-		case 5:
-			COMMON_LICENSE_CONTENT = COMMON_LICENSE_CONTENT.replace("$$licenseDesc$$", CRUCIBLE_SERVER_LICENSE_DESC)
-					.replace("$$license_expiry_date$$", "unlimited")
-					.replace("$$maintenance_expiry_date$$", "4102401599852");
-			break;
-		case 6:
-			COMMON_LICENSE_CONTENT = COMMON_LICENSE_CONTENT.replace("$$licenseDesc$$", FISH_EYE_SERVER_LICENSE_DESC)
-					.replace("$$license_expiry_date$$", "unlimited")
-					.replace("$$maintenance_expiry_date$$", "4102401599852");
-			break;
-		default:
-			System.out.println("Invalid license type code!");
-			System.exit(1);
+			case 11:
+				COMMON_LICENSE_CONTENT = COMMON_LICENSE_CONTENT.replace("$$licenseDesc$$", CONFLUENCE_SERVER_LICENSE_DESC)
+						.replace("$$license_expiry_date$$", "unlimited")
+						.replace("$$maintenance_expiry_date$$", "253402257599855");
+				CONFLUENCE_SPECIAL_LICENSE_CONTENT = CONFLUENCE_SPECIAL_LICENSE_CONTENT.replace("$$data_center$$", "false");
+				break;
+			case 12:
+				COMMON_LICENSE_CONTENT = COMMON_LICENSE_CONTENT
+						.replace("$$licenseDesc$$", CONFLUENCE_DATA_CENTER_LICENSE_DESC)
+						.replace("$$license_expiry_date$$", "253402257599855")
+						.replace("$$maintenance_expiry_date$$", "253402257599855");
+				CONFLUENCE_SPECIAL_LICENSE_CONTENT = CONFLUENCE_SPECIAL_LICENSE_CONTENT.replace("$$data_center$$", "true");
+				break;
+			case 21:
+				COMMON_LICENSE_CONTENT = COMMON_LICENSE_CONTENT
+						.replace("$$licenseDesc$$", JIRA_SOFTWARE_SERVER_LICENSE_DESC)
+						.replace("$$license_expiry_date$$", "unlimited")
+						.replace("$$maintenance_expiry_date$$", "253402257599855");
+				JIRA_SPECIAL_LICENSE_CONTENT = JIRA_SPECIAL_LICENSE_CONTENT.replace("$$data_center$$", "false");
+				break;
+			case 22:
+				COMMON_LICENSE_CONTENT = COMMON_LICENSE_CONTENT
+						.replace("$$licenseDesc$$", JIRA_SOFTWARE_DATA_CENTER_LICENSE_DESC)
+						.replace("$$license_expiry_date$$", "253402257599855")
+						.replace("$$maintenance_expiry_date$$", "253402257599855");
+				JIRA_SPECIAL_LICENSE_CONTENT = JIRA_SPECIAL_LICENSE_CONTENT.replace("$$data_center$$", "true");
+				break;
+			case 31:
+				COMMON_LICENSE_CONTENT = COMMON_LICENSE_CONTENT.replace("$$licenseDesc$$", BITBUCKET_SERVER_LICENSE_DESC)
+						.replace("$$license_expiry_date$$", "unlimited")
+						.replace("$$maintenance_expiry_date$$", "253402257599855");
+				BITBUCKET_SPECIAL_LICENSE_CONTENT = BITBUCKET_SPECIAL_LICENSE_CONTENT.replace("$$data_center$$", "false");
+				break;
+			case 32:
+				COMMON_LICENSE_CONTENT = COMMON_LICENSE_CONTENT
+						.replace("$$licenseDesc$$", BITBUCKET_DATA_CENTER_LICENSE_DESC)
+						.replace("$$license_expiry_date$$", "253402257599855")
+						.replace("$$maintenance_expiry_date$$", "253402257599855");
+				BITBUCKET_SPECIAL_LICENSE_CONTENT = BITBUCKET_SPECIAL_LICENSE_CONTENT.replace("$$data_center$$", "true");
+				break;
+			case 4:
+				COMMON_LICENSE_CONTENT = COMMON_LICENSE_CONTENT.replace("$$licenseDesc$$", BAMBOO_SERVER_LICENSE_DESC)
+						.replace("$$license_expiry_date$$", "unlimited")
+						.replace("$$maintenance_expiry_date$$", "4102401599852");
+				break;
+			case 5:
+				COMMON_LICENSE_CONTENT = COMMON_LICENSE_CONTENT.replace("$$licenseDesc$$", CRUCIBLE_SERVER_LICENSE_DESC)
+						.replace("$$license_expiry_date$$", "unlimited")
+						.replace("$$maintenance_expiry_date$$", "4102401599852");
+				break;
+			case 6:
+				COMMON_LICENSE_CONTENT = COMMON_LICENSE_CONTENT.replace("$$licenseDesc$$", FISH_EYE_SERVER_LICENSE_DESC)
+						.replace("$$license_expiry_date$$", "unlimited")
+						.replace("$$maintenance_expiry_date$$", "4102401599852");
+				break;
+			case 7:
+	            COMMON_LICENSE_CONTENT = COMMON_LICENSE_CONTENT.replace("$$licenseDesc$$", CROWD_SERVER_LICENSE_DESC)
+	                    .replace("$$license_expiry_date$$", "unlimited")
+	                    .replace("$$maintenance_expiry_date$$", "4102401599852");
+	            break;
+			default:
+				System.out.println("Invalid license type code!");
+				System.exit(1);
 		}
 		System.out.print(">> Input your server id: ");
 		String serverId = scanner.next();
@@ -153,27 +165,30 @@ public class AtlassianLicenseGenerator {
 				.replace("$$org$$", organisation).replace("$$email$$", email);
 		String licenseContent = null;
 		switch (licenseTypeCode) {
-		case 11:
-		case 12:
-			licenseContent = COMMON_LICENSE_CONTENT + CONFLUENCE_SPECIAL_LICENSE_CONTENT;
-			break;
-		case 21:
-		case 22:
-			licenseContent = COMMON_LICENSE_CONTENT + JIRA_SPECIAL_LICENSE_CONTENT;
-			break;
-		case 31:
-		case 32:
-			licenseContent = COMMON_LICENSE_CONTENT + BITBUCKET_SPECIAL_LICENSE_CONTENT;
-			break;
-		case 4:
-			licenseContent = COMMON_LICENSE_CONTENT + BAMBOO_SPECIAL_LICENSE_CONTENT;
-			break;
-		case 5:
-			licenseContent = COMMON_LICENSE_CONTENT + CRUCIBLE_SPECIAL_LICENSE_CONTENT;
-			break;
-		case 6:
-			licenseContent = COMMON_LICENSE_CONTENT + FISH_SPECIAL_LICENSE_CONTENT;
-			break;
+			case 11:
+			case 12:
+				licenseContent = COMMON_LICENSE_CONTENT + CONFLUENCE_SPECIAL_LICENSE_CONTENT;
+				break;
+			case 21:
+			case 22:
+				licenseContent = COMMON_LICENSE_CONTENT + JIRA_SPECIAL_LICENSE_CONTENT;
+				break;
+			case 31:
+			case 32:
+				licenseContent = COMMON_LICENSE_CONTENT + BITBUCKET_SPECIAL_LICENSE_CONTENT;
+				break;
+			case 4:
+				licenseContent = COMMON_LICENSE_CONTENT + BAMBOO_SPECIAL_LICENSE_CONTENT;
+				break;
+			case 5:
+				licenseContent = COMMON_LICENSE_CONTENT + CRUCIBLE_SPECIAL_LICENSE_CONTENT;
+				break;
+			case 6:
+				licenseContent = COMMON_LICENSE_CONTENT + FISH_SPECIAL_LICENSE_CONTENT;
+				break;
+			 case 7:
+	             licenseContent = COMMON_LICENSE_CONTENT + CROWD_SPECIAL_LICENSE_CONTENT;
+	             break;
 		}
 		System.out.println();
 		System.out.println("Your license content. Enjoy it!");
