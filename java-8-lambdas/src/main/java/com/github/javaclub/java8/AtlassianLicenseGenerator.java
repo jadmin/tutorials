@@ -249,4 +249,5 @@ public class AtlassianLicenseGenerator {
 		String licenseContentWithVersion = licenseContentBase64 + "X02";
 		return licenseContentWithVersion + Integer.toString(licenseContentBase64.length(), 31);
 	}
+	
 }
