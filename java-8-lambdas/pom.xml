@@ -78,6 +78,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.ggj.center</groupId>
+			<artifactId>risk-center-security</artifactId>
+			<version>0.0.4-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.8.2</version>

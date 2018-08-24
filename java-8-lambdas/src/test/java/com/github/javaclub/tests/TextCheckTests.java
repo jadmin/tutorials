@@ -35,22 +35,23 @@ public class TextCheckTests {
 
 	@Test
 	public void test4kItemName() throws Exception {
-		InputStream stream = new FileInputStream("/Users/chenzq/Documents/globalscanner/风控/商品标题过滤/本地生活商品.xlsx");
+		InputStream stream = new FileInputStream("/Users/chenzq/Documents/globalscanner/风控/商品标题过滤/商品库商品.xlsx");
 		List<List<String>> lines = ExcelUtils.readXlsxRows(stream);
+		Systems.out("======= TOTAL_ROWS={} =======", new Object[] { lines.size() });
 		for (List<String> row : lines) {
 			String col1 = row.get(1);
 			String col2 = row.get(2);
 			if(Strings.isNotBlank(col1)) {
 				NDCheckResultDTO d1 = checkTextWIthND(col1);
 				if(null != d1 && Objects.equals(2, d1.getCheckResult())) {
-					Systems.out("ID={},NAME={},HIT_RULE={}", new Object[] { row.get(0), col1, d1.getDetail()});
+					Systems.out("ID={}, NAME={}, PRODUCT_DESC={}, HIT_RULE={}", new Object[] { row.get(0), col1, col2, d1.getDetail()});
 					continue;
 				}
 			}
 			if(Strings.isNotBlank(col2)) {
 				NDCheckResultDTO d2 = checkTextWIthND(col2);
 				if(null != d2 && Objects.equals(2, d2.getCheckResult())) {
-					Systems.out("ID={},PRODUCT_DESC={},HIT_RULE={}", new Object[] { row.get(0), col2, d2.getDetail()});
+					Systems.out("ID={}, NAME={}, PRODUCT_DESC={}, HIT_RULE={}", new Object[] { row.get(0), col1, col2, d2.getDetail()});
 					continue;
 				}
 			}
