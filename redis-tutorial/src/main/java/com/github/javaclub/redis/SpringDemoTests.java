@@ -56,7 +56,7 @@ public class SpringDemoTests {
 	@Test
 	public void testJedisSingle() {
 
-		Jedis jedis = new Jedis("192.168.200.199", 6379);
+		Jedis jedis = new Jedis("192.168.56.111", 6379);
 		jedis.auth("admin");
 
 		jedis.set("name", "World");
