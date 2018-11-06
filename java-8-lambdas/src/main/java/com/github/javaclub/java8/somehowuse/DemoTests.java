@@ -60,6 +60,9 @@ public class DemoTests {
 		userList.add(u4);
 	}
 	
+	/**
+	 * 针对List集合中对象的指定字段进行去重
+	 */
 	@Test
 	public void testRemoveDup() {
 		List<User> list = userList.stream().collect(Collectors.collectingAndThen(
