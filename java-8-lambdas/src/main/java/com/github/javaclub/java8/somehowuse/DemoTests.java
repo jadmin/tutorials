@@ -9,8 +9,10 @@ package com.github.javaclub.java8.somehowuse;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeSet;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -18,6 +20,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.github.javaclub.java8.beans.Apple;
+import com.github.javaclub.java8.beans.DataMocker;
+import com.github.javaclub.java8.beans.User;
+import com.github.javaclub.sword.core.Numbers;
+import com.github.javaclub.sword.core.Strings;
+import com.google.common.collect.Lists;
 
 /**
  * DemoTests
@@ -28,6 +35,8 @@ import com.github.javaclub.java8.beans.Apple;
 public class DemoTests {
 
 	static List<Apple> appleList = new ArrayList<>();
+	
+	static List<User> userList = Lists.newArrayList();
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -40,6 +49,43 @@ public class DemoTests {
 		appleList.add(apple12);
 		appleList.add(apple2);
 		appleList.add(apple3);
+		
+		User u1 = new User(Numbers.random(999999L), Strings.random(20), "", Numbers.random(18, 88), "15968870949");
+		User u2 = new User(Numbers.random(999999L), Strings.random(20), "", Numbers.random(18, 88), "15968870949");
+		User u3 = new User(Numbers.random(999999L), Strings.random(20), "", Numbers.random(18, 88), "13688241388");
+		User u4 = new User(Numbers.random(999999L), Strings.random(20), "", Numbers.random(18, 88), "13688241388");
+		userList.add(u1);
+		userList.add(u2);
+		userList.add(u3);
+		userList.add(u4);
+	}
+	
+	@Test
+	public void testRemoveDup() {
+		List<User> list = userList.stream().collect(Collectors.collectingAndThen(
+				Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(User::getMobile))), ArrayList::new));
+		System.out.println(list);
+	}
+	
+	@Test
+	public void beansPropAsMap() { // 收集实体的属性作为map
+		List<User> list = DataMocker.generateUserList();
+		Map<Long, String> map = list.stream().collect(Collectors.toMap(User::getId, User::getName));
+		System.out.println(map);
+	}
+	
+	@Test
+	public void beansAsMap() { // 收集成实体本身map
+		List<User> list = DataMocker.generateUserList();
+		Map<Long, User> map = list.stream().collect(Collectors.toMap(User::getId, user -> user));
+		System.out.println(map);
+	}
+	
+	@Test
+	public void beansAsMap_V2() { // 收集成实体本身map
+		List<User> list = DataMocker.generateUserList();
+		Map<Long, User> map = list.stream().collect(Collectors.toMap(User::getId, Function.identity()));
+		System.out.println(map);
 	}
 
 	/**

@@ -27,5 +27,16 @@ public class User {
 	private String job;
 	private Integer age;
 	
+	private String mobile;
 	
+	public User() {
+	}
+	
+	public User(Long id, String name, String job, int age, String mobile) {
+		this.id = id;
+		this.name = name;
+		this.job = job;
+		this.age = age;
+		this.mobile = mobile;
+	}
 }

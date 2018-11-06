@@ -9,17 +9,13 @@ package com.github.javaclub.java8.somehowuse;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.Test;
 
 import com.github.javaclub.java8.beans.Artist;
-import com.github.javaclub.java8.beans.DataMocker;
 import com.github.javaclub.java8.beans.MusicChapter;
-import com.github.javaclub.java8.beans.User;
 
 /**
  * Java8Lambdas
@@ -45,27 +41,6 @@ public class Java8Lambdas extends MusicChapter {
 		System.out.println(list);
 	}
 	
-	@Test
-	public void beansPropAsMap() { // 收集实体的属性作为map
-		List<User> list = DataMocker.generateUserList();
-		Map<Long, String> map = list.stream().collect(Collectors.toMap(User::getId, User::getName));
-		System.out.println(map);
-	}
-	
-	@Test
-	public void beansAsMap() { // 收集成实体本身map
-		List<User> list = DataMocker.generateUserList();
-		Map<Long, User> map = list.stream().collect(Collectors.toMap(User::getId, user -> user));
-		System.out.println(map);
-	}
-	
-	@Test
-	public void beansAsMap_V2() { // 收集成实体本身map
-		List<User> list = DataMocker.generateUserList();
-		Map<Long, User> map = list.stream().collect(Collectors.toMap(User::getId, Function.identity()));
-		System.out.println(map);
-	}
-    
 	@Test
     public void getNamesOfArtists_MethodReference() {
 		List<String> list = artists.stream()
