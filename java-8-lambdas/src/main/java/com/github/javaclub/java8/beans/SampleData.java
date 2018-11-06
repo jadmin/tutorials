@@ -37,8 +37,14 @@ public class SampleData {
     }
     
     public static List<Artist> getSomeArtists() {
-        return Arrays.asList(johnColtrane, johnLennon, theBeatles, gerald, 
-        		paulMcCartney, georgeHarrison, ringoStarr);
+        return Arrays.asList(johnColtrane, 
+        						johnLennon, 
+        						theBeatles, 
+        						gerald, 
+        						paulMcCartney, 
+        						georgeHarrison, 
+        						ringoStarr
+        	);
     }
 
 }
