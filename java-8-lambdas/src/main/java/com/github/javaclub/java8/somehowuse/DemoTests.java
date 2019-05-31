@@ -71,6 +71,17 @@ public class DemoTests {
 	}
 	
 	@Test
+	public void testChangeBeanProp() { // 改变实体中的属性
+		userList.forEach(e -> {
+			e.setAge(Numbers.random(10, 99));
+			e.setName(com.github.javaclub.sword.util.DataMocker.generateName());
+		});
+		System.out.println(userList);
+		
+		Long i = 20190305111031128L;
+	}
+	
+	@Test
 	public void beansPropAsMap() { // 收集实体的属性作为map
 		List<User> list = DataMocker.generateUserList();
 		Map<Long, String> map = list.stream().collect(Collectors.toMap(User::getId, User::getName));
