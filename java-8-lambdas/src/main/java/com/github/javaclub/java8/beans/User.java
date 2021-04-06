@@ -7,6 +7,8 @@
 
 package com.github.javaclub.java8.beans;
 
+import java.util.Date;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -28,6 +30,8 @@ public class User {
 	private Integer age;
 	
 	private String mobile;
+	
+	private Date topDate;
 	
 	public User() {
 	}

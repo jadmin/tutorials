@@ -24,6 +24,7 @@ import com.github.javaclub.java8.beans.DataMocker;
 import com.github.javaclub.java8.beans.User;
 import com.github.javaclub.sword.core.Numbers;
 import com.github.javaclub.sword.core.Strings;
+import com.github.javaclub.sword.util.DateUtil;
 import com.google.common.collect.Lists;
 
 /**
@@ -141,6 +142,38 @@ public class DemoTests {
 		// 计算 总金额
 		BigDecimal totalMoney = appleList.stream().map(Apple::getMoney).reduce(BigDecimal.ZERO, BigDecimal::add);
 		System.out.println("totalMoney = " + totalMoney); // totalMoney:17.48
+	}
+	
+	@Test
+	public void testOrderAsc() {
+		List<User> list = Lists.newArrayList();
+		for (int i = 0; i < 10; i++) {
+			User u = new User(Numbers.random(10000L, 9999999L), Strings.random(3, 8), "job", Numbers.random(100), "11111111111");
+			u.setTopDate(DateUtil.randomDate("2001-10-01", "2021-12-31"));
+			list.add(u);
+		}
+		list.sort(Comparator.comparing(User::getTopDate));
+		list.forEach(x -> {
+			System.out.println(DateUtil.getTimestampFormat(x.getTopDate()));
+		});
+	}
+	
+	@Test
+	public void testOrderDesc() {
+		List<User> list = Lists.newArrayList();
+		for (int i = 0; i < 10; i++) {
+			User u = new User(Numbers.random(10000L, 9999999L), Strings.random(3, 8), "job", Numbers.random(100), "11111111111");
+			if(i % 2 == 0) {
+				u.setTopDate(DateUtil.randomDate("2001-10-01", "2021-12-31"));
+			} else {
+				u.setTopDate(null);
+			}
+			list.add(u);
+		}
+		list.sort(Comparator.comparing(User::getTopDate).reversed());
+		list.forEach(x -> {
+			System.out.println(DateUtil.getTimestampFormat(x.getTopDate()));
+		});
 	}
 
 

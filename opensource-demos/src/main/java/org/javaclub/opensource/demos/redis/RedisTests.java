@@ -30,7 +30,7 @@ public class RedisTests {
 
 	private static Jedis jedis;
 
-	static final String REDIS_IP = "192.168.200.199";
+	static final String REDIS_IP = "192.168.56.111";
 	static final int REDIS_PORT = 6379;
 	static final String REDIS_AUTH = "admin";
 
@@ -136,6 +136,7 @@ public class RedisTests {
 		jedis.sadd("user", "ling");
 		jedis.sadd("user", "zhangxinxin");
 		jedis.sadd("user", "who");
+		jedis.sadd("user", "ling");
 		// 移除noname
 		jedis.srem("user", "who");
 		System.out.println(jedis.smembers("user"));// 获取所有加入的value
@@ -144,7 +145,7 @@ public class RedisTests {
 		System.out.println(jedis.srandmember("user"));
 		System.out.println(jedis.scard("user"));// 返回集合的元素个数
 	}
-
+	
 	@Test
 	public void test() throws InterruptedException {
 		// jedis 排序

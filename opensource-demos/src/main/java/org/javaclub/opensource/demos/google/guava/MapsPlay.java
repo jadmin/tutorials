@@ -70,6 +70,8 @@ public class MapsPlay {
 		
 		List<Integer> tom  = (List<Integer>) multimap.get("Tom");
 		System.out.println(tom);
+		
+		System.out.println(multimap.asMap());
 	}
 	
 	@Test
